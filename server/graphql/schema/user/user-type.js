@@ -28,15 +28,5 @@ const userType = gql`
       deleteUser(id:ID):UserType
     }
     `;
+    
     module.exports = userType;
-
-
-    // input UserInput {
-    //     _id:ID
-    //     name:String
-    //     age:Int
-    // }
-    // type Query {
-    //     user(id:ID):UserType
-    //     users:[UserType]
-    // }
