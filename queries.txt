@@ -1,0 +1,71 @@
+====================================================================
+USER QUERIES:
+====================================================================
+
+mutation {
+  addUser(input: {
+    firstName:"Ben",
+    lastName:"Egan",
+    emailAddress:"benjamin.egan3@gmail.com",
+    username:"benny",
+    password:"password1234"
+  }) {
+    _id
+    firstName
+    lastName
+    emailAddress
+    username
+    password
+  }
+}
+
+query {
+  user(id:"63591b352b90f09753e2941a") {
+		_id
+    firstName
+    lastName
+    emailAddress
+    username
+    password
+  }
+}
+
+query {
+  users {
+		_id
+    firstName
+    lastName
+    emailAddress
+    username
+    password
+  }
+}
+
+mutation {
+   editUser(input: {
+    id: "63591b352b90f09753e2941a",
+    firstName:"Peter",
+    lastName:"Egan",
+    emailAddress:"theicecreammachine@gmail.com",
+    username:"peterPickle",
+    password:"password1234"
+  }) {
+    _id
+    firstName
+    lastName
+    emailAddress
+    username
+    password
+  }
+}
+
+mutation {
+  deleteUser(id:"63591b352b90f09753e2941a"){
+    _id
+    firstName
+    lastName
+    emailAddress
+    username
+    password
+  }
+}
