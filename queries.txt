@@ -124,3 +124,16 @@ mutation {
     storePhoto
   }
 }
+
+query {
+  store(id:"6359c3ea7853797b4e5752a8") {
+    _id
+    storeName
+    address
+    phone
+    website
+    signatureBagel
+    storePhoto
+  }
+}
+

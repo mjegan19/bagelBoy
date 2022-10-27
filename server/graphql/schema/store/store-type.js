@@ -21,6 +21,11 @@ const storeType = gql`
     storePhoto: String
   }
 
+  type Query {
+    store(id: ID): StoreType
+    stores: [StoreType]
+  }
+
   type Mutation {
     addStore(input: StoreInput): StoreType
     editStore(input: StoreInput): StoreType

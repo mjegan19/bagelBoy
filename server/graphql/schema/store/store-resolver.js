@@ -1,6 +1,15 @@
 const StoreModel = require('../../../models/store');
 
 const storeResolver = {
+  Query: {
+    store: (parent, args) => {
+      return StoreModel.findById(args.id);
+    },
+    stores: (parent, args) => {
+      return StoreModel.find();
+    }
+  },
+
   Mutation: {
     addStore: (parent, args) => {
       console.log(args.input);
