@@ -1,6 +1,6 @@
-====================================================================
+===============================================================
 USER QUERIES:
-====================================================================
+===============================================================
 
 mutation {
   addUser(input: {
@@ -67,5 +67,60 @@ mutation {
     emailAddress
     username
     password
+  }
+}
+
+
+===============================================================
+STORE QUERIES:
+===============================================================
+
+mutation {
+  addStore(input: {
+    storeName: "Bakes & Bagels",
+    address: "2/211 Settlement Rd, Thomastown VIC 3074",
+    phone: "(03) 9052 4662",
+    website: "https://www.instagram.com/bakesandbagels_/?hl=en",
+    signatureBagel: "Croque Monsieur",
+    storePhoto: "https://scontent.fmel5-1.fna.fbcdn.net/v/t39.30808-6/242712025_999993234175543_8063594934848049787_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a26aad&_nc_ohc=O5NQQVCkuiIAX813StC&_nc_ht=scontent.fmel5-1.fna&oh=00_AfB18xrT-O1m9sLRvc0B_5EvVxASDTOtjM3AuYkhv2lqmw&oe=635F45FE",
+  }){
+    _id
+    storeName
+    address
+    phone
+    website
+    signatureBagel
+    storePhoto
+  }
+}
+
+mutation {
+   editStore(input: {
+    id: "6359cecb0dcf0a4b2e0b2a33",
+    storeName: "Schmucks Bagels",
+    address: "9/567 Collins St, Melbourne VIC 3000",
+    phone: "(03) 9614 3238",
+    website: "https://schmucksbagels.com.au/",
+    signatureBagel: "Morning Sunshine",
+    storePhoto: "https://www.google.com/maps/uv?pb=!1s0x6ad642d882561f35%3A0x68ab3a9b6b5a1a40!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMncKkxBY_aNKoBx63eNWKssVibx_80qrTulBz-%3Dw104-h69-n-k-no!5sbagels%20-%20Google%20Search!15sCgIgAQ&imagekey=!1e10!2sAF1QipMncKkxBY_aNKoBx63eNWKssVibx_80qrTulBz-&hl=en&sa=X&ved=2ahUKEwiapszYh__6AhVGE7cAHTxuAG0Q7ZgBKAF6BAgGEAM#"
+  }) {
+    _id
+    firstName
+    lastName
+    emailAddress
+    username
+    password
+  }
+}
+
+mutation {
+	deleteStore(id:"6359c7909e72a2e6fbf6b96c"){
+    _id
+    storeName
+    address
+    phone
+    website
+    signatureBagel
+    storePhoto
   }
 }
