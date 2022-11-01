@@ -19,21 +19,22 @@ app.use(cors());
 // =========================================
 //FIND ALL RESOLVERS
 //iterate through resolvers file in the folder "graphql/folder/folder/whatever*-resolver.js"
-let resolvers = glob.sync("graphql/*/*/*-resolver.js");
+let resolvers = glob.sync("src/graphql/*/*/*-resolver.js");
+console.log('resolvers: ' + resolvers)
 let registerResolvers = [];
 for (const resolver of resolvers) {
   // add resolvers to array
-  registerResolvers = [...registerResolvers, require("./" + resolver)];
+  registerResolvers = [...registerResolvers, require("../" + resolver)];
 }
 
 //FIND ALL TYPES
 //iterate through resolvers file in the folder "graphql/folder/folder/whatever*-type.js"
-let types = glob.sync("graphql/*/*/*-type.js");
+let types = glob.sync("src/graphql/*/*/*-type.js");
+console.log('types: ' + types)
 let registerTypes = [];
 for (const type of types) {
   // add types to array
-  console.log(type);
-  registerTypes = [...registerTypes, require("./" + type)];
+  registerTypes = [...registerTypes, require("../" + type)];
 }
 // =========================================
 
@@ -60,4 +61,4 @@ app.use(
 // Listen for Server Connection
 app.listen(4000, () => {
   console.log("GraphQL API server is running and can be accessed at http://localhost:4000/graphql");
-})
+});
