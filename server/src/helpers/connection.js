@@ -5,7 +5,7 @@ async function connect(connectionString) {
     console.log("connecting...")
     try {
         const connectionResult = await mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true  });
-        if (connectionResult) console.log("Connected to MongoDB established.")
+        if (connectionResult) console.log("Connection to MongoDB established.")
     } catch (err) {
         (err) => console.error("Connection failed.", err);
     }
