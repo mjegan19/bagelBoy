@@ -2,11 +2,10 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-const AuthButton = ({ children, sitePath, onClick, variant }) => {
+const AuthButton = ({ children, onClick, variant }) => {
   return (
     <Button
       type="button"
-      href={sitePath}
       onClick={onClick}
       variant={variant}
     >

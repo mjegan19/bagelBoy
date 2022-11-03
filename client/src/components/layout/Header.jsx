@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
-import AuthButton from '../common/AuthButton';
+// import AuthButton from '../common/AuthButton';
 
 import Bagel from '../../assets/images/header/bagel.png'
 
@@ -23,13 +24,13 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-              <Nav.Link href="#">Link</Nav.Link>
-              <Nav.Link href="#">Link</Nav.Link>
-              <Nav.Link href="#">Link</Nav.Link>
+              <Nav.Link as={Link} to="/bagels/stores">Stores</Nav.Link>
+              <Nav.Link as={Link} to="#">Link</Nav.Link>
+              <Nav.Link as={Link} to="#">Link</Nav.Link>
           </Nav>
           <Nav>
-            <AuthButton sitePath="/register" variant="outline-info">Create Account</AuthButton>{' '}
-            <AuthButton sitePath="/signin" variant="warning">Sign In</AuthButton>
+            <Nav.Link as={Link} to="/register" variant="outline-info">Create Account</Nav.Link>{' '}
+            <Nav.Link as={Link} to="/signin" variant="warning">Sign In</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
