@@ -14,7 +14,7 @@ const StoreDetails = () => {
   return (
     <div>
       {data.stores.map((store) => (
-      <Card style={{ width: '18rem' }} key={store.id}>
+      <Card style={{ width: '18rem' }} key={store._id}>
         <Card.Img variant="top" src={store.storePhoto} />
         <Card.Body>
           <Card.Title>{store.storeName}</Card.Title>
@@ -24,7 +24,7 @@ const StoreDetails = () => {
           </Card.Text>
           <Card.Subtitle className="mb-2 text-muted">{store.phone}</Card.Subtitle>
           <Card.Footer>
-          <small className="text-muted"><a href={store.website} target="_blank" rel="noreferrer">Vist {store.storeName}'s website</a></small>
+          <small className="text-muted"><a href={store.website} target="_blank" rel="noreferrer">Visit {store.storeName}'s website</a></small>
         </Card.Footer>
           <Button variant="primary">Go somewhere</Button>
         </Card.Body>

@@ -39,11 +39,6 @@ const Register = () => {
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formPasswordRepeat">
-          <Form.Label>Re-enter Password</Form.Label>
-          <Form.Control type="password" placeholder="Re-enter Password" />
-        </Form.Group>
-
         <Button variant="primary" type="submit">
           Submit
         </Button>
