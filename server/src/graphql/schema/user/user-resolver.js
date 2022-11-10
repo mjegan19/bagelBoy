@@ -12,8 +12,8 @@ const userResolver = {
 
   Mutation: {
     addUser: (parent, args) => {
-      console.log(args.input);
       let user = new UserModel(args.input);
+      console.log(args.input);
       return user.save();
     },
     editUser: async (parent, args) => {

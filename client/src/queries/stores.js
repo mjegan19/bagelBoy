@@ -5,10 +5,28 @@ export const GET_STORES = gql`
     stores {
       _id
       storeName
-      address
+      streetAddress
+      city
       phone
       website
       signatureBagel
+      description
+      storePhoto
+    }
+  }
+`;
+
+export const GET_STORE_BY_ID = gql`
+  query store($id: ID) {
+    store(id: $id) {
+      _id
+      storeName
+      streetAddress
+      city
+      phone
+      website
+      signatureBagel
+      description
       storePhoto
     }
   }
@@ -17,26 +35,32 @@ export const GET_STORES = gql`
 export const ADD_STORE = gql`
   mutation AddStore(
     $storeName: String,
-    $address: String,
+    $streetAddress: String,
+    $city: String,
     $phone: String,
     $website: String,
     $signatureBagel: String,
+    $description: String,
     $storePhoto: String
     ) {
       addStore(input: {
         storeName: $storeName,
-        address: $address,
+        streetAddress: $streetAddress,
+        city: $city,
         phone: $phone,
         website: $website,
         signatureBagel: $signatureBagel,
+        description: $description,
         storePhoto: $storePhoto        
     }) {
       _id
       storeName,
-      address,
+      streetAddress,
+      city,
       phone,
       website,
       signatureBagel,
+      description,
       storePhoto
     }
   }

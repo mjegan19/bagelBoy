@@ -20,14 +20,16 @@ const AddStore = () => {
   // State
   const [storeData, setStoreData] = useState({
     storeName: "",
-    address: "",
+    streetAddress: "",
+    city: "",
     phone: "",
     website: "",
     signatureBagel: "",
+    description: "",
     storePhoto: "",
   });
   
-  const { storeName, address, phone, website, signatureBagel, storePhoto } = storeData;
+  const { storeName, streetAddress, city, phone, website, signatureBagel, description, storePhoto } = storeData;
   
   const [addStore, { data, loading, error }] = useMutation(ADD_STORE);
   
@@ -36,10 +38,12 @@ const AddStore = () => {
   // Joi Validation
   const schema = Joi.object({
     storeName: Joi.string().min(2).max(150).required(),
-    address: Joi.string().min(2).max(250).required(),
+    streetAddress: Joi.string().min(2).max(250).required(),
+    city: Joi.string().min(2).max(100).required(),
     phone: Joi.string().min(2).max(10).required(),
     website: Joi.string().min(2).max(250).required(),
     signatureBagel: Joi.string().min(2).max(100).required(),
+    description: Joi.string().min(2).max(5000).required(),
     storePhoto: Joi.string().min(2).max(1000).required(),
   });
 
@@ -72,26 +76,31 @@ const AddStore = () => {
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (validateStoreFormData(schema, { 
       storeName: storeName,
-      address: address,
+      streetAddress: streetAddress,
+      city: city,
       phone: phone,
       website: website,
       signatureBagel: signatureBagel,
+      description: description,
       storePhoto: storePhoto
     })) {
       return;
     }
-
+    
     try {
-      e.preventDefault();
+      
       const result = await addStore({
         variables: {
           storeName: storeName,
-          address: address,
+          streetAddress: streetAddress,
+          city: city,
           phone: phone,
           website: website,
           signatureBagel: signatureBagel,
+          description: description,
           storePhoto: storePhoto
         }
       });
@@ -104,7 +113,6 @@ const AddStore = () => {
   }
 
   if (loading) return 'Submitting...';
-
   if (error) return `Submission error! ${error.message}`;
 
   return (
@@ -126,16 +134,30 @@ const AddStore = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formStoreAddress">
-        <Form.Label>Store Address</Form.Label>
+        <Form.Label>Enter store's street address</Form.Label>
         <Form.Control
         type="input" 
-        placeholder="Enter bagel store's address"
-        name="address"
-        value={address}
+        placeholder="eg. 123 Fake Street"
+        name="streetAddress"
+        value={streetAddress}
         onChange={handleFormFieldUpdate}
       />
-        {errors.address &&
-          <Alert color={"danger"}>{errors.address}</Alert>  
+        {errors.streetAddress &&
+          <Alert color={"danger"}>{errors.streetAddress}</Alert>  
+        }
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formStoreAddress">
+        <Form.Label>In which city is the store located?</Form.Label>
+        <Form.Control
+        type="input" 
+        placeholder="eg. Melbourne"
+        name="city"
+        value={city}
+        onChange={handleFormFieldUpdate}
+      />
+        {errors.city &&
+          <Alert color={"danger"}>{errors.city}</Alert>  
         }
       </Form.Group>
       
@@ -175,10 +197,24 @@ const AddStore = () => {
           name="signatureBagel"
           value={signatureBagel}
           onChange={handleFormFieldUpdate}
-        />
+          />
         {errors.signatureBagel &&
           <Alert color={"danger"}>{errors.signatureBagel}</Alert>  
         }
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>Store Description</Form.Label>
+        <Form.Control 
+          as="textarea"
+          rows={3} 
+          name="description"
+          value={description}
+          onChange={handleFormFieldUpdate}
+          />
+          {errors.description &&
+            <Alert color={"danger"}>{errors.description}</Alert>  
+          }
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formStorePhoto">

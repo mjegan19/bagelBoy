@@ -4,20 +4,24 @@ const storeType = gql`
   type StoreType {
     _id: ID
     storeName: String
-    address: String
+    streetAddress: String
+    city: String
     phone: String
     website: String
     signatureBagel: String
+    description: String
     storePhoto: String
   }
 
   input StoreInput {
     id: ID
     storeName: String
-    address: String
+    streetAddress: String
+    city: String
     phone: String
     website: String
     signatureBagel: String
+    description: String
     storePhoto: String
   }
 

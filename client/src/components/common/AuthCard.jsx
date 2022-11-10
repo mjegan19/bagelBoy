@@ -9,7 +9,7 @@ const StyledCard = styled.div`
   padding: 2rem 3rem;
   width: 450px;
   border: 1px solid #D0D3D4;
-  border-radius: 25px;
+  border-radius: 0px;
   background-color: #FFFFFF;
 
   .card-header {
@@ -27,7 +27,7 @@ const AuthCard = ({ header, children }) => {
     <ComponentCntr>
       <StyledCard>
         <div className="card-header">
-          <p>{header}</p>
+          <h2>{header}</h2>
         </div>
         {children}
       </StyledCard>

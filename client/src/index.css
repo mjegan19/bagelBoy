@@ -1,4 +1,24 @@
 /* Global CSS Styles are Declared Here */
+@import url('https://fonts.googleapis.com/css2?family=Poller+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Swash:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Typography */
+  --logo: 'Poller One', cursive;
+  --headings: 'Cherry Swash', cursive;
+  --links: 'Open Sans', sans-serif;
+  --body: 'Assistant', sans-serif;
+
+  /* Site Colours */
+  --light-white: #FFFFFF;
+  --light-highlight: #EAECEE;
+  --dark-black: #17202A;
+
+  --dark-background: #0E6251;
+}
+
 
 .app {
   display: flex;
@@ -8,4 +28,19 @@
 
 html, body {
   background-color: #FBFCFC;
+  font-family: var(--body);
+}
+
+h1, h2, h3 {
+  font-family: var(--headings);
+  font-weight: 700;
+  color: var(--dark-background);
+}
+
+h1 {
+  margin: 3rem 0 1.5rem;
+}
+
+a {
+  font-family: var(--links);
 }
