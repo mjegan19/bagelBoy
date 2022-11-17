@@ -1,6 +1,13 @@
 const RatingModel = require('../../../models/rating');
+const StoreModel = require('../../../models/store');
 
 const ratingResolver = {
+  RatingType: {
+    store_relate: (parent, args) => {
+      console.log("Rating Type");
+      return StoreModel.findById(parent.store);
+    }
+  },
   Query: {
     rating: (parent, args) => {
       return RatingModel.findById(args.id);

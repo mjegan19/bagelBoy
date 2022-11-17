@@ -32,6 +32,20 @@ export const GET_STORE_BY_ID = gql`
   }
 `;
 
+export const GET_STORE_RATINGS_BY_ID = gql`
+query store($id: ID) {
+  store(id: $id) {
+    ratings
+ 			{
+				_id
+        rating
+        feedback
+    	}
+  	}
+  }
+`;
+
+
 export const ADD_STORE = gql`
   mutation AddStore(
     $storeName: String,

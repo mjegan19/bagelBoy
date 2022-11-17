@@ -16,6 +16,7 @@
   --light-highlight: #EAECEE;
   --dark-black: #17202A;
 
+  --light-background: #E8F8F5;
   --dark-background: #0E6251;
 }
 
@@ -29,6 +30,11 @@
 html, body {
   background-color: #FBFCFC;
   font-family: var(--body);
+}
+
+footer {
+  background-color: var(--light-background);
+  margin-top: 7.5rem;
 }
 
 h1, h2, h3 {

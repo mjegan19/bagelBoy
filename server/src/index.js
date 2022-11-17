@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const glob = require("glob");
+const morgan = require('morgan');
 const { graphqlHTTP } = require("express-graphql");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
@@ -14,6 +15,8 @@ const app = express();
 
 // Enable Middleware
 app.use(cors());
+
+app.use(morgan('dev'));
 
 
 // =========================================

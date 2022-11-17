@@ -5,12 +5,15 @@ const ratingType = gql`
     _id: ID
     feedback: String
     rating: Int
+    store: ID
+    store_relate: StoreType
   }
 
   input RatingInput {
     id: ID
     feedback: String
     rating: Int
+    store: ID
   }
 
   type Query {

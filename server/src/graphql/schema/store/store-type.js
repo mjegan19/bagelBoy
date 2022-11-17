@@ -11,6 +11,7 @@ const storeType = gql`
     signatureBagel: String
     description: String
     storePhoto: String
+    ratings: [RatingType]
   }
 
   input StoreInput {
