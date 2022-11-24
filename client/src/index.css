@@ -20,6 +20,9 @@
   --dark-background: #0E6251;
 }
 
+* {
+  box-sizing: border-box;
+}
 
 .app {
   display: flex;
@@ -49,4 +52,8 @@ h1 {
 
 a {
   font-family: var(--links);
+}
+
+a:hover {
+  text-decoration: underline;
 }

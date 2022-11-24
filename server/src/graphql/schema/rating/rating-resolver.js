@@ -19,15 +19,15 @@ const ratingResolver = {
 
   Mutation: {
     addRating: (parent, args) => {
-      console.log(args.input);
+      console.log("Hitting Endpoint");
       let rating = new RatingModel(args.input);
       return rating.save();
     },
     editRating: async (parent, args) => {
       try {
-        console.log(args.input.id);
+        console.log(args.input._id);
         return await RatingModel.findByIdAndUpdate(
-          args.input.id,
+          args.input._id,
           args.input,
           { new: true }
         );
@@ -37,6 +37,7 @@ const ratingResolver = {
     },
     deleteRating: async (parent, args) => {
       try {
+        console.log("Hitting Delete Endpoint");
         return await RatingModel.findByIdAndRemove(args.id);
       } catch (error) {
         return error;

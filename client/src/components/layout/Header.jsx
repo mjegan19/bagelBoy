@@ -3,47 +3,43 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
-// import AuthButton from '../common/AuthButton';
-
 import Bagel from '../../assets/images/header/bagel.png'
 
-
-const Header = () => {
-
-  const LogoAnimate = styled(Navbar.Brand)`
+const StyledNavbar = styled(Navbar)`
+    background-color: var(--dark-background);
+    color: var(--light-font);
+    
+    .icon {
     transition: 1s ease-in-out;
-
+    
     &:hover {
       transform: rotate(90deg);
     }
-  `;
-
-  const Logo = styled(Navbar.Brand)`
+  } 
+  
+  .logo {
     margin-right: 2rem;
     font-family: var(--logo);
     font-size: 1.5rem;
-  `;
+  }
 
-  const StyledNavbar = styled(Navbar)`
-    background-color: var(--dark-background);
-    color: var(--light-font);
-  `;
-
-  const StyledLink = styled(Nav.Link)`
+  Nav.Link {
     color: var(--light-white);
     text-decoration: none;
     margin: 0 0.6rem 0;
 
     &:hover {
-      colour: var(--light-white);
-      /* text-decoration: underline; */
+      color: var(--light-white);\
     }
+  }
   `;
+
+const Header = () => {
 
   return (
     <StyledNavbar collapseOnSelect expand="lg" variant="dark">
       <Container>
-        <LogoAnimate href="/">
+        <Navbar.Brand href="/" className="icon">
           <img
             alt="Bagel Icon"
             src={Bagel}
@@ -51,18 +47,18 @@ const Header = () => {
             height="40"
             className="d-inline-block align-top"
             />{' '}
-        </LogoAnimate>
-        <Logo href="/">Bagel Boy</Logo>
+        </Navbar.Brand>
+        <Navbar.Brand href="/" className="logo">Bagel Boy</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-              <StyledLink as={Link} to="/bagels/stores">Stores</StyledLink>
-              <StyledLink as={Link} to="/bagels/stores/add">Add a Store</StyledLink>
-              <StyledLink as={Link} to="/about">About Us</StyledLink>
+              <Nav.Link as={Link} to="/bagels/stores">Stores</Nav.Link>
+              <Nav.Link as={Link} to="/bagels/stores/add">Add a Store</Nav.Link>
+              <Nav.Link as={Link} to="/about">About Us</Nav.Link>
           </Nav>
           <Nav>
-            <StyledLink as={Link} to="/register" variant="outline-info">Create Account</StyledLink>{' '}
-            <StyledLink as={Link} to="/signin" variant="warning">Sign In</StyledLink>
+            <Nav.Link as={Link} to="/register" variant="outline-info">Create Account</Nav.Link>{' '}
+            <Nav.Link as={Link} to="/signin" variant="warning">Sign In</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

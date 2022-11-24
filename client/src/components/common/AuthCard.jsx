@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ComponentCntr from '../layout/ComponentCntr';
 
 const StyledCard = styled.div`
-
   margin: 2rem;
   padding: 2rem 3rem;
   width: 450px;
@@ -21,13 +20,21 @@ const StyledCard = styled.div`
   }
 `;
 
+// Variable H2 Render based on Props Input
+const AuthCard = ({ header, storeName, children }) => {
+  let pageHeading;
+  if (storeName === null) {
+    pageHeading = <h2>{header}</h2>;
+  } else {
+    pageHeading = <h2>{header}<br />{storeName}</h2>
+  }
 
-const AuthCard = ({ header, children }) => {
+
   return (
     <ComponentCntr>
       <StyledCard>
         <div className="card-header">
-          <h2>{header}</h2>
+          {pageHeading}
         </div>
         {children}
       </StyledCard>

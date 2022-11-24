@@ -2,10 +2,11 @@
 const express = require("express");
 const cors = require("cors");
 const glob = require("glob");
-const morgan = require('morgan');
 const { graphqlHTTP } = require("express-graphql");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
+
+const config = require ("./config/config");
 
 // Import Developer's Modules
 const connect = require("./helpers/connection");
@@ -15,9 +16,6 @@ const app = express();
 
 // Enable Middleware
 app.use(cors());
-
-app.use(morgan('dev'));
-
 
 // =========================================
 //FIND ALL RESOLVERS
@@ -50,7 +48,7 @@ const schema = makeExecutableSchema({
 });
 
 // Establish Database Connection
-connect.connect("mongodb://localhost:37017/bagelBoy");
+connect.connect(config.db);
 
 // Set Route for GraphQL
 app.use(
@@ -62,6 +60,6 @@ app.use(
 );
 
 // Listen for Server Connection
-app.listen(4000, () => {
-  console.log("GraphQL API server is running and can be accessed at http://localhost:4000/graphql");
+app.listen(config.port, () => {
+  console.log(`GraphQL API server is running and can be accessed at http://localhost:${config.port}/graphql`);
 });

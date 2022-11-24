@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { FiMonitor } from 'react-icons/fi';
 import { BsFillTelephoneOutboundFill } from 'react-icons/bs';
 import { FaFileSignature } from 'react-icons/fa';
+import { BsBoxArrowUpRight } from 'react-icons/bs'
 
 import RatingsList from '../../components/common/RatingsList';
 
@@ -17,7 +18,6 @@ import { GET_STORE_BY_ID } from '../../queries/stores';
 
 const AddressHeader = styled(Col)`
   margin: 0 2rem 2rem 0.7rem;
-  /* padding: 0.3rem; */
   background-color: var(--light-highlight);
 `;
 
@@ -61,20 +61,6 @@ const StoreDetailed = () => {
       {id: params.id}
   });
 
-  const [storeData, setStoreData] = useState({
-    id: params.id,
-    storeName: "",
-    streetAddress: "",
-    city: "",
-    phone: "",
-    website: "",
-    signatureBagel: "",
-    description: "",
-    storePhoto: "",
-  });
-
-  const { id, storeName, streetAddress, city, phone, website, signatureBagel, description, storePhoto } = storeData;
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
@@ -90,7 +76,7 @@ const StoreDetailed = () => {
         <DisplayBox>
           <IconBox><FaFileSignature size={80} /></IconBox>
           <IconText>Their Signature Bagel</IconText>
-          <div>{data.store.signatureBagel}</div>
+          <div>" {data.store.signatureBagel} "</div>
         </DisplayBox>
         <DisplayBox>
           <IconBox><BsFillTelephoneOutboundFill size={80} /></IconBox>
@@ -99,8 +85,8 @@ const StoreDetailed = () => {
         </DisplayBox>
         <DisplayBox>
           <IconBox><FiMonitor size={80}/></IconBox>
-          <IconText>Surf Their Web</IconText>
-          <div>{data.store.website}</div>         
+          <IconText>Visit Their Website</IconText>
+          <div><a href={data.store.website} target="_blank" rel="noreferrer" className="store-site">{data.store.storeName}'s site <BsBoxArrowUpRight /></a></div>         
         </DisplayBox>
       </Row>
 
@@ -116,7 +102,7 @@ const StoreDetailed = () => {
           </Button>
         </Col>
       </StyledRow>
-      <RatingsList id={params.id}/>
+      <RatingsList id={params.id} storeName={data.store.storeName} />
     </main>
   )
 }

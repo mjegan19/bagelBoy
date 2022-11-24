@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 
-const IndividualStore = (props) => {
-
   const HeaderRow = styled(Row)`
     /* margin-bottom: 0.5rem; */
     padding: 0.2rem 0 0.2rem;
@@ -21,6 +19,7 @@ const IndividualStore = (props) => {
   `;
 
 
+const IndividualStore = (props) => {
 
   return (
     <div>
@@ -29,7 +28,7 @@ const IndividualStore = (props) => {
         <Col>Store Name</Col>
         <Col>Located</Col>
         <Col>Rating</Col>
-        <Col></Col>
+        <Col>Website</Col>
       </HeaderRow>
       { props.stores.map(( store ) => (
         <BodyRow key={store._id}>
@@ -43,7 +42,7 @@ const IndividualStore = (props) => {
           </Col>
           <Col>{store.city}</Col>
           <Col>⭐️⭐️⭐️⭐️⭐️</Col>
-          <Col>3 of 3</Col>
+          <Col><a href={store.website} target="_blank" rel="noreferrer">Visit {store.storeName}'s website.</a></Col>
         </BodyRow>
       ))}
     </div>

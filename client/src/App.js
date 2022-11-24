@@ -10,6 +10,8 @@ import StoreDetails from './pages/Stores/StoreList';
 import AddStore from './pages/Stores/AddStore';
 import StoreDetailed from './pages/Stores/StoreDetailed';
 import AddRating from './pages/Stores/AddRating';
+import NotFound from './pages/NotFound';
+import EditRating from './pages/Stores/EditRating';
 
 function App() {
   return (
@@ -23,8 +25,12 @@ function App() {
           <Route path="stores/add" element={<AddStore />} />
         </Route>
         <Route path="reviews/:id" element={<AddRating />} />
+        <Route path="reviews/edit/:id" element={<EditRating />} />
         <Route path="register" element={<Register />} />
-        <Route path="signin" element={<SignIn />} />   
+        <Route path="signin" element={<SignIn />} />
+
+        {/* ERROR PAGES */}
+        <Route path="*" element={<NotFound />} /> 
       </Route>
     </Routes>
   );

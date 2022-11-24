@@ -19,7 +19,7 @@ const Styles = styled.div`
 
   .reset {
     position: absolute;
-    top: 150px;
+    top: 200px;
     left: 25%;
     right: 25%;
 
@@ -28,8 +28,8 @@ const Styles = styled.div`
     }
 
     h1 {
-      font-family: var(--logo);
-      font-size: 3rem;
+      font-family: var(--logo-typeface);
+      font-size: 3.5rem;
     }
 
     div {
@@ -39,7 +39,9 @@ const Styles = styled.div`
   }
 `;
 
-const HeroBox = ({ title, content, button, page, onClick }) => {
+const ShoutBox = ({ title, content, button, page }) => {
+
+  const navigate = useNavigate();
 
   var bgImg;
     if (page === "home") {
@@ -48,34 +50,48 @@ const HeroBox = ({ title, content, button, page, onClick }) => {
     if (page === "about") {
       bgImg = require('../../assets/images/header/bagel-muted.jpg');
     }
+    if (page === "notFound"){
+      bgImg = require('../../assets/images/header/salad-bagel.jpg')
+    }
 
-  const navigate = useNavigate();
 
-  return (
-    <Styles>
-      <div
-        className='overlay'
-        style={{
-          backgroundImage: `url(${bgImg})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          height: '550px',
-          borderRadius: '50px'
-        }}
-      >
-      </div>
-      <div className='reset'>
-        <h1>{title}</h1>
-        <p>{content}</p>
-        { button && (
-          <div>
-            <Button onClick={onClick}>{button}</Button>
-          </div>
-        )}
-      </div>
-    </Styles>
-  )
-}
+    const handleClick = (e) => {
+      if (page === "home") {
+        return navigate("/bagels/stores");
+      }
+      if (page === "about") {
+        return navigate("/signin");
+      }
+      if (page === "notFound") {
+        return navigate("/");
+      }
+    }
 
-export default HeroBox
+    return (
+      <Styles>
+        <div
+          className='overlay'
+          style={{
+            backgroundImage: `url(${bgImg})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            height: '550px',
+            borderRadius: '50px'
+          }}
+        >
+        </div>
+        <div className='reset'>
+          <h1>{title}</h1>
+          <p>{content}</p>
+          { button && (
+            <div>
+              <Button onClick={handleClick}>{button}</Button>
+            </div>
+          )}
+        </div>
+      </Styles>
+    )
+  }
+
+export default ShoutBox

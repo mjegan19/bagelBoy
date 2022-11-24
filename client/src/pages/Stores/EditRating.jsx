@@ -10,35 +10,34 @@ import { Alert } from 'react-bootstrap';
 import AuthCard from '../../components/common/AuthCard';
 
 // Queries
-import { ADD_RATING } from '../../queries/ratings';
-import { GET_STORE_BY_ID } from '../../queries/stores';
+import { EDIT_RATING } from '../../queries/ratings';
+import { GET_RATING_BY_ID } from '../../queries/ratings';
 
-const AddRating = () => {
+
+const EditRating = () => {
 
   const navigate = useNavigate();
 
   const params = useParams();
 
-  const [storeData, setStoreData] = useState({
-    id: params.id,
-  });
-
   
   // State
-  const [ratingData, setRatingData] = useState({
-    feedback: "",
-    rating: 0,
-    store: storeData.id
-  });
-  
-  const { feedback, rating, store } = ratingData;
-  
-  const { data: storesData, loading: storesLoading, error: storesError} = useQuery(GET_STORE_BY_ID, {
+  const { 
+    data: currentRatingData, 
+    loading: currentRatingLoading, 
+    error: currentRatingError
+  } = useQuery(GET_RATING_BY_ID, {
     variables: { id: params.id }
   });
-
-  console.log(storesData);
-  const [addRating, { data, loading, error }] = useMutation(ADD_RATING);
+  
+  const [newRatingData, setNewRatingData] = useState({
+    feedback: "",
+    rating: 0,
+  });
+  
+  const { feedback, rating } = newRatingData;
+  
+  const [editRating] = useMutation(EDIT_RATING);
   
   const [errors, setErrors] = useState("");
 
@@ -50,10 +49,11 @@ const AddRating = () => {
 
   const handleFormFieldUpdate = (e) => {
     const { name, value } = e.target;
-    setRatingData({
-      ...ratingData,
+    setNewRatingData({
+      ...newRatingData,
       [name]: value
     });
+    console.log(newRatingData.feedback)
   }
 
   function validateRatingFormData(schema, data) {
@@ -87,25 +87,29 @@ const AddRating = () => {
     
     try {
       
-      const result = await addRating({
+      const result = await editRating({
         variables: {
+          id: params.id,
           feedback: feedback,
           rating: Number(rating),
-          store: store
+          store: currentRatingData.rating.store_relate._id
         }
       });
+      console.log(typeof(params.id) + ": " + params.id);
+      console.log(typeof(feedback) + ": " + feedback);
+      console.log(typeof(rating) + ": " + rating);
       console.log(result);
-      navigate(`/bagels/stores/${storeData.id}`);
+      navigate(`/bagels/stores/${currentRatingData.rating.store_relate._id}`);
     } catch (error) {
       console.log(error);
       window.scroll({top: 0, behavior: 'smooth'});
     }
   }
 
-  if (loading || storesLoading) return 'Submitting...';
+  if (currentRatingLoading) return 'Submitting...';
   
   
-  if (error || storesError) {
+  if (currentRatingError) {
     return (
       <Alert variant="danger" dismissible>
         <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -119,7 +123,7 @@ const AddRating = () => {
   }
 
   return (
-    <AuthCard header="Add a review for " storeName={`${storesData.store.storeName}`}>
+    <AuthCard header="Edit review for " storeName={`${currentRatingData.rating.store_relate.storeName}`}>
     <Form onSubmit={handleSubmit}>
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -131,9 +135,9 @@ const AddRating = () => {
           value={feedback}
           onChange={handleFormFieldUpdate}
           />
-          {errors.feedback &&
+          {/* {errors.feedback &&
             <Alert color={"danger"}>{errors.feedback}</Alert>  
-          }
+          } */}
       </Form.Group>
 
       <Form.Group>
@@ -195,4 +199,4 @@ const AddRating = () => {
   )
 }
 
-export default AddRating;
+export default EditRating;

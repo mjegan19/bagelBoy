@@ -15,7 +15,7 @@ const storeType = gql`
   }
 
   input StoreInput {
-    id: ID
+    _id: ID
     storeName: String
     streetAddress: String
     city: String

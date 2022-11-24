@@ -1,12 +1,17 @@
+// Import Core Modules
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+
+// Import Validation Library
 import Joi from 'joi';
 
+// Import Bootstrap Components
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Alert } from 'react-bootstrap';
 
+// Import custom component
 import AuthCard from '../../components/common/AuthCard';
 
 // Queries
@@ -14,10 +19,10 @@ import { ADD_STORE } from '../../queries/stores';
 
 const AddStore = () => {
 
-
+  // Load navigate hook into variable to allow internal routing
   const navigate = useNavigate();
 
-  // State
+  // Create state to hold store data and specify variables initial value.
   const [storeData, setStoreData] = useState({
     storeName: "",
     streetAddress: "",
@@ -29,10 +34,13 @@ const AddStore = () => {
     storePhoto: "",
   });
   
+  // Deconstruct store data variables
   const { storeName, streetAddress, city, phone, website, signatureBagel, description, storePhoto } = storeData;
   
+  // Load mutation into variable to prepare data for transmission to server
   const [addStore, { data, loading, error }] = useMutation(ADD_STORE);
   
+  // Declare error variables and define initial state
   const [errors, setErrors] = useState("");
 
   // Joi Validation
@@ -47,6 +55,7 @@ const AddStore = () => {
     storePhoto: Joi.string().min(2).max(1000).required(),
   });
 
+  // onClick event to update form input to correct storeData variable.
   const handleFormFieldUpdate = (e) => {
     const { name, value } = e.target;
     setStoreData({
@@ -55,6 +64,7 @@ const AddStore = () => {
     });
   }
 
+  // Function to validate form data against Joi validation before transmitting to server.  Return error response if validation fails.
   function validateStoreFormData(schema, data) {
     setErrors(null);
     const result = schema.validate(data, { abortEarly: false });
@@ -75,6 +85,7 @@ const AddStore = () => {
     }
   }
 
+  // onclick form submit handler.  Query validate function, if successful, run add query to push data to the server.
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateStoreFormData(schema, { 
@@ -119,6 +130,7 @@ const AddStore = () => {
     <AuthCard header="Add a Bagel Store">
     <Form onSubmit={handleSubmit}>
 
+      {/* Store Name Input */}
       <Form.Group className="mb-3" controlId="formStoreName">
         <Form.Label>Store Name</Form.Label>
         <Form.Control
@@ -133,6 +145,7 @@ const AddStore = () => {
         }
       </Form.Group>
 
+      {/* Store Address Input */}
       <Form.Group className="mb-3" controlId="formStoreAddress">
         <Form.Label>Enter store's street address</Form.Label>
         <Form.Control
@@ -147,6 +160,7 @@ const AddStore = () => {
         }
       </Form.Group>
 
+      {/* Store City Input */}
       <Form.Group className="mb-3" controlId="formStoreAddress">
         <Form.Label>In which city is the store located?</Form.Label>
         <Form.Control
@@ -161,6 +175,7 @@ const AddStore = () => {
         }
       </Form.Group>
       
+      {/* Store Phone Number Input */}
       <Form.Group className="mb-3" controlId="formPhoneNumber">
         <Form.Label>Phone Number</Form.Label>
         <Form.Control 
@@ -175,6 +190,7 @@ const AddStore = () => {
         }
       </Form.Group>
 
+      {/* Store Website Address Input */}
       <Form.Group className="mb-3" controlId="formWebAddress">
         <Form.Label>Website Address</Form.Label>
         <Form.Control 
@@ -189,6 +205,7 @@ const AddStore = () => {
         }
       </Form.Group>
 
+      {/* Store Bagel Question Input */}
       <Form.Group className="mb-3" controlId="formSignatureBagel">
         <Form.Label>What is the store's signature bagel?</Form.Label>
         <Form.Control 
@@ -203,6 +220,7 @@ const AddStore = () => {
         }
       </Form.Group>
 
+      {/* Store Description Input */}
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Store Description</Form.Label>
         <Form.Control 
@@ -217,6 +235,7 @@ const AddStore = () => {
           }
       </Form.Group>
 
+      {/* Store Photo Link Input */}
       <Form.Group className="mb-3" controlId="formStorePhoto">
         <Form.Label>Add a store photo...</Form.Label>
         <Form.Control 
@@ -231,6 +250,7 @@ const AddStore = () => {
         }
       </Form.Group>
 
+      {/* Form Submit Button */}
       <Button variant="primary" type="submit">
         Submit
       </Button>

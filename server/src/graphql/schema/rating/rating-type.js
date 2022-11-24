@@ -10,7 +10,7 @@ const ratingType = gql`
   }
 
   input RatingInput {
-    id: ID
+    _id: ID
     feedback: String
     rating: Int
     store: ID
